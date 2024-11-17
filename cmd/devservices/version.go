@@ -40,6 +40,9 @@ func newVersionCmd(out io.Writer, config *configuration.Configuration) *cobra.Co
 		},
 	}
 
+	f := cmd.Flags()
+	f.BoolVar(&options.short, "short", false, "print the version number")
+
 	return cmd
 }
 
