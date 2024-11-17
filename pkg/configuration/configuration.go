@@ -1,8 +1,14 @@
-package configuration
+package configuration // import "github.com/get-devservices/devservices/pkg/configuration"
 
-type Configuration struct{}
+import "github.com/get-devservices/devservices/internal/devservices/docker"
+
+type Configuration struct {
+	DockerClient *docker.DockerClient
+}
 
 // Create object configuration
 func New() *Configuration {
-	return &Configuration{}
+	return &Configuration{
+		DockerClient: docker.New(),
+	}
 }

@@ -3,15 +3,17 @@ package version
 import "runtime"
 
 type BuildVersion struct {
-	Version   string `json:"version,omitempty"`
-	GoVersion string `json:"goVersion,omitempty"`
+	Version       string `json:"version,omitempty"`
+	DockerVersion string `json:"dockerVersion,omitempty"`
+	GoVersion     string `json:"goVersion,omitempty"`
 }
 
 const version = "0.1.0"
 
-func Get() *BuildVersion {
+func Get(dockerVersion string) *BuildVersion {
 	return &BuildVersion{
-		Version:   version,
-		GoVersion: runtime.Version(),
+		Version:       version,
+		DockerVersion: dockerVersion,
+		GoVersion:     runtime.Version(),
 	}
 }

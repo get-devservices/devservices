@@ -37,7 +37,7 @@ func newRootCmd(config *configuration.Configuration, out io.Writer, args []strin
 	flags.Parse(args)
 
 	cmd.AddCommand(
-		newVersionCmd(out),
+		newVersionCmd(out, config),
 	)
 
 	return cmd, nil

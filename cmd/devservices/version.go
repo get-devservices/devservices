@@ -5,6 +5,7 @@ import (
 	"io"
 
 	"github.com/get-devservices/devservices/internal/devservices/version"
+	"github.com/get-devservices/devservices/pkg/configuration"
 	"github.com/get-devservices/devservices/pkg/require"
 	"github.com/spf13/cobra"
 )
@@ -25,7 +26,7 @@ type versionOptions struct {
 	short bool
 }
 
-func newVersionCmd(out io.Writer) *cobra.Command {
+func newVersionCmd(out io.Writer, config *configuration.Configuration) *cobra.Command {
 	options := &versionOptions{}
 
 	cmd := &cobra.Command{
@@ -35,20 +36,20 @@ func newVersionCmd(out io.Writer) *cobra.Command {
 		Args:              require.NoArgs,
 		ValidArgsFunction: require.NoMoreArgsCompFunc,
 		RunE: func(_ *cobra.Command, _ []string) error {
-			return options.run(out)
+			return options.run(out, config.DockerClient.Version())
 		},
 	}
 
 	return cmd
 }
 
-func (options *versionOptions) run(out io.Writer) error {
-	fmt.Fprintln(out, buildVersion(options.short))
+func (options *versionOptions) run(out io.Writer, dockerVerion string) error {
+	fmt.Fprintln(out, buildVersion(options.short, dockerVerion))
 	return nil
 }
 
-func buildVersion(short bool) string {
-	v := version.Get()
+func buildVersion(short bool, dockerVersion string) string {
+	v := version.Get(dockerVersion)
 	if short {
 		return v.Version
 	}

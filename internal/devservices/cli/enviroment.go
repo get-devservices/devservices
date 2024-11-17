@@ -1,4 +1,4 @@
-package cli
+package cli // import "github.com/get-devservices/devservices/internal/devservices/cli"
 
 import (
 	"os"
