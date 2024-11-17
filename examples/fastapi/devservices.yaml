@@ -1,0 +1,12 @@
+name: "fastapi-project"
+
+infrastructure:
+  - postgres:
+      version: latest
+      enviroment:
+        POSTGRES_USER: postgers
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: devservices
+      schemas:
+        - portal
+        - users
